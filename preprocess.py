@@ -17,7 +17,7 @@ corpus = list(set(corpus))
 print("Deduplicated")
 print(len(corpus))
 #
-tokens = [list(filter(lambda x: x != '', filter(lambda x: x != ' ', re.split("(\.|\(|\)|\[|\]|\{|\}|;|:|,|\'|\"|\+\+|\-\-|\^|\\\\|`|!|\?|===|==|<<|>>|<=|=>|>=|<|>|\*|=|\|&&|&|\||\||\s)", line.rstrip())))) for line in corpus]
+tokens = [list(filter(lambda x: x.isascii(), filter(lambda x: x != '', filter(lambda x: x != ' ', re.split("(\.|\(|\)|\[|\]|\{|\}|;|:|,|\'|\"|\+\+|\-\-|\^|\\\\|`|!|\?|===|==|<<|>>|<=|=>|>=|<|>|\*|=|\|&&|&|\||\||\s)", line.rstrip()))))) for line in corpus]
 print("Acquired tokens")
 #vocab = list(dict(Counter(sum(tokens, []))).items())
 vocab = list(set(sum(tokens, [])))
@@ -32,7 +32,7 @@ id_to_word = df.to_dict()
 df_2 = pd.Series(df.index.values, df.values)
 word_to_id = df_2.to_dict()
 print(id_to_word)
-print([i if not word.isprintable() else 1 for i, word in enumerate(vocab, 1)])
+#print([i if not word.isascii() else 1 for i, word in enumerate(vocab, 1)])
 
 dataset = []
 
@@ -42,7 +42,8 @@ for line in tokens:
             line[i] = word_to_id[line[i]]
         line.extend([n_token + 1] * (20 - len(line)))
         dataset.append(line)
-            
+dataset = dataset[:54000]
+
 with open(output_path, 'w') as f:
     for row in dataset:
         f.write(" ".join(list(map(str, row))) + "\n")

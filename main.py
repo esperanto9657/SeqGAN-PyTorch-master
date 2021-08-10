@@ -28,13 +28,13 @@ print(opt)
 
 # Basic Training Paramters
 SEED = 88
-BATCH_SIZE = 15 #64
-TOTAL_BATCH = 10 #200
-GENERATED_NUM = 150 #10000
-POSITIVE_FILE = '1.data'
-NEGATIVE_FILE = 'gene1.data'
-EVAL_FILE = 'eval1.data'
-VOCAB_SIZE = 242 #5000
+BATCH_SIZE = 270 #64
+TOTAL_BATCH = 200 #200
+GENERATED_NUM = 54000 #10000
+POSITIVE_FILE = '2.data'
+NEGATIVE_FILE = 'gene2.data'
+EVAL_FILE = 'eval2.data'
+VOCAB_SIZE = 18629 #5000
 PRE_EPOCH_NUM = 5 #120
 
 if opt.cuda is not None and opt.cuda >= 0:
